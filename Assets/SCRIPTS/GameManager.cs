@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,14 +9,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardsManager cardsManager;
     [SerializeField] private PanelManager panelManager;
     [SerializeField] private TimerUI timerUI;
+    [SerializeField] private float dayIntroDisplayTime = 3f;
 
     private int currentDayIndex = 0;
     private float currentDayTimer;
     private int acceptedValidPeople = 0;
     private bool isDayInProgress = false;
 
-    public event Action<int> OnDayStart;
-    public event Action<int> OnDayEnd;
+    public event System.Action<int> OnDayStart;
+    public event System.Action<int> OnDayEnd;
 
     private void Start()
     {
@@ -41,6 +43,23 @@ public class GameManager : MonoBehaviour
 
         currentDayIndex = dayIndex;
         DayData currentDay = days[currentDayIndex];
+        
+        StartCoroutine(ShowDayIntroAndStartDay(currentDay));
+    }
+
+    private IEnumerator ShowDayIntroAndStartDay(DayData currentDay)
+    {
+        yield return StartCoroutine(panelManager.ShowDayIntroPanel(currentDayIndex + 1, currentDay.requiredPeople));
+
+        yield return new WaitForSeconds(dayIntroDisplayTime);
+
+        yield return StartCoroutine(panelManager.FadeOutDayIntroPanel());
+
+        SetupDay(currentDay);
+    }
+
+    private void SetupDay(DayData currentDay)
+    {
         currentDayTimer = currentDay.lengthInSeconds;
         acceptedValidPeople = 0;
         isDayInProgress = true;
@@ -62,7 +81,6 @@ public class GameManager : MonoBehaviour
             if (currentDayIndex + 1 < days.Count)
             {
                 panelManager.ShowDayPassedPanel();
-                StartDay(currentDayIndex + 1);
             }
             else
             {
@@ -102,5 +120,27 @@ public class GameManager : MonoBehaviour
     public bool IsDayInProgress()
     {
         return isDayInProgress;
+    }
+
+    public void RestartGame()
+    {
+        StartCoroutine(RestartGameCoroutine());
+    }
+
+    private IEnumerator RestartGameCoroutine()
+    {
+        yield return StartCoroutine(panelManager.FadeOutAllPanels());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ContinueToNextDay()
+    {
+        StartCoroutine(ContinueToNextDayCoroutine());
+    }
+
+    private IEnumerator ContinueToNextDayCoroutine()
+    {
+        yield return StartCoroutine(panelManager.FadeOutAllPanels());
+        StartDay(currentDayIndex + 1);
     }
 }
