@@ -15,19 +15,21 @@ public class Card : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dislikesText;
 
     [SerializeField] private float swipeDuration = 0.5f;
-    [SerializeField] private Vector2 swipeRightEndAnchor = new Vector2(2, 0.5f);
-    [SerializeField] private Vector2 swipeLeftEndAnchor = new Vector2(-1, 0.5f);
+    [SerializeField] private float swipeDistance = 1000f;
     [SerializeField] private float rotationAngle = 20f;
 
     private RectTransform rectTransform;
     private ProfileData profileData;
-    private Vector2 originalAnchorPos;
+    private CanvasGroup canvasGroup;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        originalAnchorPos = rectTransform.anchorMin = rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        rectTransform.anchoredPosition = Vector2.zero;
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
     }
 
     public void Initialize(ProfileData data)
@@ -38,14 +40,21 @@ public class Card : MonoBehaviour
         ageText.text = data.age.ToString();
         occupationText.text = data.occupation;
         bioText.text = data.bio;
-        likesText.text = $"Likes: {data.likes}";
-        dislikesText.text = $"Dislikes: {data.dislikes}";
+        likesText.text = data.likes;
+        dislikesText.text = data.dislikes;
     }
 
     public bool IsImpostor => profileData.isImpostor;
 
+    public void SetVisible(bool visible)
+    {
+        canvasGroup.alpha = visible ? 1 : 0;
+        canvasGroup.blocksRaycasts = visible;
+    }
+
     public void AnimateIn()
     {
+        SetVisible(true);
         rectTransform.localScale = Vector3.zero;
         rectTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
     }
@@ -53,8 +62,9 @@ public class Card : MonoBehaviour
     public void SwipeRight(Action onComplete)
     {
         Sequence swipeSequence = DOTween.Sequence();
-        swipeSequence.Append(rectTransform.DOAnchorPos(swipeRightEndAnchor, swipeDuration).SetEase(Ease.InBack));
+        swipeSequence.Append(rectTransform.DOAnchorPos(new Vector2(swipeDistance, 0), swipeDuration).SetEase(Ease.InBack));
         swipeSequence.Join(rectTransform.DORotate(new Vector3(0, 0, -rotationAngle), swipeDuration));
+        swipeSequence.Join(canvasGroup.DOFade(0, swipeDuration));
         swipeSequence.OnComplete(() => 
         {
             onComplete?.Invoke();
@@ -65,8 +75,9 @@ public class Card : MonoBehaviour
     public void SwipeLeft(Action onComplete)
     {
         Sequence swipeSequence = DOTween.Sequence();
-        swipeSequence.Append(rectTransform.DOAnchorPos(swipeLeftEndAnchor, swipeDuration).SetEase(Ease.InBack));
+        swipeSequence.Append(rectTransform.DOAnchorPos(new Vector2(-swipeDistance, 0), swipeDuration).SetEase(Ease.InBack));
         swipeSequence.Join(rectTransform.DORotate(new Vector3(0, 0, rotationAngle), swipeDuration));
+        swipeSequence.Join(canvasGroup.DOFade(0, swipeDuration));
         swipeSequence.OnComplete(() => 
         {
             onComplete?.Invoke();
