@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int currentDayIndex = 0;
     private float currentDayTimer;
     private int acceptedValidPeople = 0;
+    private bool isDayInProgress = false;
 
     public event Action<int> OnDayStart;
     public event Action<int> OnDayEnd;
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentDayIndex >= days.Count) return;
+        if (currentDayIndex >= days.Count || !isDayInProgress) return;
 
         currentDayTimer -= Time.deltaTime;
         timerUI.UpdateTimer(currentDayTimer, days[currentDayIndex].lengthInSeconds);
@@ -42,14 +43,17 @@ public class GameManager : MonoBehaviour
         DayData currentDay = days[currentDayIndex];
         currentDayTimer = currentDay.lengthInSeconds;
         acceptedValidPeople = 0;
+        isDayInProgress = true;
 
         cardsManager.SetDifficultyRange(currentDay.minDifficulty, currentDay.maxDifficulty);
+        cardsManager.ResetForNewDay();
         timerUI.SetupTimer(currentDay.lengthInSeconds);
         OnDayStart?.Invoke(currentDayIndex);
     }
 
     private void EndDay()
     {
+        isDayInProgress = false;
         DayData currentDay = days[currentDayIndex];
         OnDayEnd?.Invoke(currentDayIndex);
 
@@ -93,5 +97,10 @@ public class GameManager : MonoBehaviour
     public int GetAcceptedValidPeople()
     {
         return acceptedValidPeople;
+    }
+
+    public bool IsDayInProgress()
+    {
+        return isDayInProgress;
     }
 }

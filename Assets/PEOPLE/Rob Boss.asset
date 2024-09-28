@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7481d902f2afb489cada9023268fd465, type: 3}
   m_Name: Rob Boss
   m_EditorClassIdentifier: 
-  profilePicture: {fileID: 0}
+  profilePicture: {fileID: 21300000, guid: ce3e2cece8a1e41fcb1930caa2135976, type: 3}
   name: Rob Boss
   age: 25
   occupation: Developer
