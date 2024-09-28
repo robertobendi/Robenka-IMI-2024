@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7481d902f2afb489cada9023268fd465, type: 3}
-  m_Name: Rob Boss 1
+  m_Name: Gary
   m_EditorClassIdentifier: 
-  profilePicture: {fileID: 21300000, guid: f1945afc068ea44c28429f3914eda6a0, type: 3}
-  name: Rob Boss
-  age: 25
-  occupation: Developer
-  likes: developing
-  dislikes: murdering
-  bio: hello im Rob Boss the famous developer please don't kill me
+  profilePicture: {fileID: 21300000, guid: ce3e2cece8a1e41fcb1930caa2135976, type: 3}
+  name: Gary
+  age: 32
+  occupation: Fisherman
+  likes: fishing!
+  dislikes: not fishing
+  bio: Hi I'm gary do you know i like fishing, we could do it sometimes :)
   isImpostor: 0
-  difficulty: 1
+  difficulty: 0

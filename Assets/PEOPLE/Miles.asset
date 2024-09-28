@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7481d902f2afb489cada9023268fd465, type: 3}
-  m_Name: Rob Boss 2
+  m_Name: Miles
   m_EditorClassIdentifier: 
-  profilePicture: {fileID: 21300000, guid: a931e21fe15e9469c9b8aa7d44a0d254, type: 3}
-  name: Rob Boss
-  age: 25
-  occupation: Developer
-  likes: developing
-  dislikes: murdering
-  bio: hello im Rob Boss the famous developer please don't kill me
-  isImpostor: 0
+  profilePicture: {fileID: 21300000, guid: 7b6823d07d48b4ba9903c39553db89e0, type: 3}
+  name: Miles
+  age: 42
+  occupation: Constuction
+  likes: Vegan food
+  dislikes: Frisbees
+  bio: Go Vegan! save the planet :)
+  isImpostor: 1
   difficulty: 1
