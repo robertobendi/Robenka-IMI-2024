@@ -1659,6 +1659,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b9c3fdf29f5d4d7a88fe2296006196d, type: 2}
   - {fileID: 11400000, guid: 10ce02abe56c740a992cfcc484d8688a, type: 2}
   - {fileID: 11400000, guid: f57536e065a5e43c4aa7ea464db47a41, type: 2}
+  - {fileID: 11400000, guid: f89be9f61af23452d97827e194bcf380, type: 2}
+  - {fileID: 11400000, guid: 91e6732cd51a643098a15ac10b6ff226, type: 2}
+  - {fileID: 11400000, guid: 1b2fd60712db044a59265ee00c33e895, type: 2}
+  - {fileID: 11400000, guid: 23a386e45b47e4fd881d024e5d84bf14, type: 2}
+  - {fileID: 11400000, guid: 4cc12d41d70be434a9fdb070bcb1f2e8, type: 2}
   cardPrefab: {fileID: 7176275395708251047, guid: cca4ba72ac5064504a34fd2cf540c769, type: 3}
   cardSpawnPoint: {fileID: 211041792628339171}
   cardSpawnDelay: 0.1
