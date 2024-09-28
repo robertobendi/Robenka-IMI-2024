@@ -17,8 +17,6 @@ public class CardsManager : MonoBehaviour
     private List<ProfileData> availableProfiles;
     private List<Card> cardStack = new List<Card>();
 
-    private int acceptedImpostors = 0;
-
     private int minDifficulty;
     private int maxDifficulty;
 
@@ -29,27 +27,9 @@ public class CardsManager : MonoBehaviour
 
     private void Start()
     {
-        if (cardPrefab == null)
+        if (cardPrefab == null || cardSpawnPoint == null || gameManager == null || availableProfiles == null || availableProfiles.Count == 0)
         {
-            Debug.LogError("Card Prefab not set");
-            return;
-        }
-
-        if (cardSpawnPoint == null)
-        {
-            Debug.LogError("Card Spawn Point not set");
-            return;
-        }
-
-        if (gameManager == null)
-        {
-            Debug.LogError("Game Manager reference not set");
-            return;
-        }
-
-        if (availableProfiles == null || availableProfiles.Count == 0)
-        {
-            Debug.LogError("No profiles available");
+            Debug.LogError("CardsManager: One or more required components are not set!");
             return;
         }
 
@@ -117,11 +97,7 @@ public class CardsManager : MonoBehaviour
         if (cardStack.Count > 0 && gameManager.IsDayInProgress())
         {
             Card currentCard = cardStack[cardStack.Count - 1];
-            if (currentCard.IsImpostor)
-                acceptedImpostors++;
-            else
-                gameManager.AcceptValidPerson();
-
+            gameManager.AcceptPerson(!currentCard.IsImpostor);
             currentCard.SwipeRight(() => RemoveTopCard());
         }
     }
@@ -153,11 +129,6 @@ public class CardsManager : MonoBehaviour
     {
         minDifficulty = min;
         maxDifficulty = max;
-    }
-
-    public int GetAcceptedImpostorCount()
-    {
-        return acceptedImpostors;
     }
 
     public void ResetForNewDay()

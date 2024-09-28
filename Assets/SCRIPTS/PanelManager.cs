@@ -15,7 +15,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dayNumberText;
     [SerializeField] private TextMeshProUGUI personsNeededText;
     
-    [SerializeField] private float fadeDuration = 0.5f;
+    [SerializeField] private float fadeDuration = 1f;
 
     private CanvasGroup basePanelCanvasGroup;
     private CanvasGroup dayPassedCanvasGroup;
@@ -70,7 +70,7 @@ public class PanelManager : MonoBehaviour
         dayIntroPanel.SetActive(true);
         dayIntroPanelCanvasGroup.alpha = 0;
         
-        yield return dayIntroPanelCanvasGroup.DOFade(1, fadeDuration).WaitForCompletion();
+        yield return dayIntroPanelCanvasGroup.DOFade(2, fadeDuration).WaitForCompletion();
     }
 
     public IEnumerator FadeOutDayIntroPanel()
