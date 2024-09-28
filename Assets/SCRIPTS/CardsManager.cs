@@ -9,6 +9,8 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private RectTransform cardSpawnPoint;
     [SerializeField] private float cardSpawnDelay = 0.5f;
     [SerializeField] private int maxVisibleCards = 2;
+    [SerializeField] private float zoomInDuration = 0.5f;
+    [SerializeField] private Ease zoomInEase = Ease.OutBack;
 
     [SerializeField] private GameManager gameManager;
 
@@ -27,7 +29,6 @@ public class CardsManager : MonoBehaviour
 
     private void Start()
     {
-        // failsafe to check if stuff explodes
         if (cardPrefab == null)
         {
             Debug.LogError("Card Prefab not set");
@@ -42,7 +43,7 @@ public class CardsManager : MonoBehaviour
 
         if (gameManager == null)
         {
-            Debug.LogError("Game Manager reference  not set");
+            Debug.LogError("Game Manager reference not set");
             return;
         }
 
@@ -90,15 +91,23 @@ public class CardsManager : MonoBehaviour
         newCard.Initialize(randomProfile);
         newCard.SetVisible(false);
         cardStack.Insert(0, newCard);
+        ApplyZoomInAnimation(newCard);
 
         PositionCards();
+    }
+
+    private void ApplyZoomInAnimation(Card card)
+    {
+        RectTransform cardRect = card.GetComponent<RectTransform>();
+        cardRect.localScale = Vector3.zero;
+        cardRect.DOScale(Vector3.one, zoomInDuration).SetEase(zoomInEase);
     }
 
     private void PositionCards()
     {
         for (int i = 0; i < cardStack.Count; i++)
         {
-            float yOffset = i * 10f; // Adjust this value to change the stacking effect
+            float yOffset = i * 10f;
             cardStack[i].SetPosition(new Vector3(0, -yOffset, 0));
         }
     }
