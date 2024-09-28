@@ -20,9 +20,38 @@ public class CardsManager : MonoBehaviour
     private int minDifficulty;
     private int maxDifficulty;
 
-    private void Start()
+    private void Awake()
     {
         availableProfiles = new List<ProfileData>(profiles);
+    }
+
+    private void Start()
+    {
+        // failsafe to check if stuff explodes
+        if (cardPrefab == null)
+        {
+            Debug.LogError("Card Prefab not set");
+            return;
+        }
+
+        if (cardSpawnPoint == null)
+        {
+            Debug.LogError("Card Spawn Point not set");
+            return;
+        }
+
+        if (gameManager == null)
+        {
+            Debug.LogError("Game Manager reference  not set");
+            return;
+        }
+
+        if (availableProfiles == null || availableProfiles.Count == 0)
+        {
+            Debug.LogError("No profiles available");
+            return;
+        }
+
         SpawnInitialCards();
     }
 
@@ -40,7 +69,7 @@ public class CardsManager : MonoBehaviour
 
     private void SpawnNewCard()
     {
-        if (availableProfiles.Count == 0 || !gameManager.IsDayInProgress())
+        if (availableProfiles == null || availableProfiles.Count == 0 || !gameManager.IsDayInProgress())
         {
             return;
         }
@@ -129,6 +158,7 @@ public class CardsManager : MonoBehaviour
             Destroy(card.gameObject);
         }
         cardStack.Clear();
+        availableProfiles = new List<ProfileData>(profiles);
         SpawnInitialCards();
     }
 }
