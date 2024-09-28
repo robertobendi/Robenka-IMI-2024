@@ -40,8 +40,8 @@ public class Card : MonoBehaviour
         ageText.text = data.age.ToString();
         occupationText.text = data.occupation;
         bioText.text = data.bio;
-        likesText.text = $"Likes: {data.likes}";
-        dislikesText.text = $"Dislikes: {data.dislikes}";
+        likesText.text = data.likes;
+        dislikesText.text = data.dislikes;
     }
 
     public bool IsImpostor => profileData.isImpostor;
