@@ -9,6 +9,8 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private RectTransform cardSpawnPoint;
     [SerializeField] private float cardSpawnDelay = 0.5f;
     [SerializeField] private int maxVisibleCards = 2;
+    [SerializeField] private float zoomInDuration = 0.5f;
+    [SerializeField] private Ease zoomInEase = Ease.OutBack;
 
     [SerializeField] private GameManager gameManager;
 
@@ -20,9 +22,37 @@ public class CardsManager : MonoBehaviour
     private int minDifficulty;
     private int maxDifficulty;
 
-    private void Start()
+    private void Awake()
     {
         availableProfiles = new List<ProfileData>(profiles);
+    }
+
+    private void Start()
+    {
+        if (cardPrefab == null)
+        {
+            Debug.LogError("Card Prefab not set");
+            return;
+        }
+
+        if (cardSpawnPoint == null)
+        {
+            Debug.LogError("Card Spawn Point not set");
+            return;
+        }
+
+        if (gameManager == null)
+        {
+            Debug.LogError("Game Manager reference not set");
+            return;
+        }
+
+        if (availableProfiles == null || availableProfiles.Count == 0)
+        {
+            Debug.LogError("No profiles available");
+            return;
+        }
+
         SpawnInitialCards();
     }
 
@@ -40,7 +70,7 @@ public class CardsManager : MonoBehaviour
 
     private void SpawnNewCard()
     {
-        if (availableProfiles.Count == 0 || !gameManager.IsDayInProgress())
+        if (availableProfiles == null || availableProfiles.Count == 0 || !gameManager.IsDayInProgress())
         {
             return;
         }
@@ -61,15 +91,23 @@ public class CardsManager : MonoBehaviour
         newCard.Initialize(randomProfile);
         newCard.SetVisible(false);
         cardStack.Insert(0, newCard);
+        ApplyZoomInAnimation(newCard);
 
         PositionCards();
+    }
+
+    private void ApplyZoomInAnimation(Card card)
+    {
+        RectTransform cardRect = card.GetComponent<RectTransform>();
+        cardRect.localScale = Vector3.zero;
+        cardRect.DOScale(Vector3.one, zoomInDuration).SetEase(zoomInEase);
     }
 
     private void PositionCards()
     {
         for (int i = 0; i < cardStack.Count; i++)
         {
-            float yOffset = i * 10f; // Adjust this value to change the stacking effect
+            float yOffset = i * 10f;
             cardStack[i].SetPosition(new Vector3(0, -yOffset, 0));
         }
     }
@@ -129,6 +167,7 @@ public class CardsManager : MonoBehaviour
             Destroy(card.gameObject);
         }
         cardStack.Clear();
+        availableProfiles = new List<ProfileData>(profiles);
         SpawnInitialCards();
     }
 }

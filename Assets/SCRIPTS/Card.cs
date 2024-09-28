@@ -46,10 +46,28 @@ public class Card : MonoBehaviour
 
     public bool IsImpostor => profileData.isImpostor;
 
-    public void SetVisible(bool visible)
+    public void SetVisible(bool visible, bool instant = false, float duration = 0.5f, Ease ease = Ease.OutBack)
     {
-        canvasGroup.alpha = visible ? 1 : 0;
-        canvasGroup.blocksRaycasts = visible;
+        if (instant)
+        {
+            canvasGroup.alpha = visible ? 1 : 0;
+            canvasGroup.blocksRaycasts = visible;
+            rectTransform.localScale = Vector3.one;
+        }
+        else
+        {
+            canvasGroup.blocksRaycasts = visible;
+            if (visible)
+            {
+                canvasGroup.alpha = 1;
+                rectTransform.localScale = Vector3.zero;
+                rectTransform.DOScale(Vector3.one, duration).SetEase(ease);
+            }
+            else
+            {
+                canvasGroup.alpha = 0;
+            }
+        }
     }
 
     public void SetPosition(Vector3 position)
