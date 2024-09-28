@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7481d902f2afb489cada9023268fd465, type: 3}
-  m_Name: Rob Boss
+  m_Name: Gaster
   m_EditorClassIdentifier: 
-  profilePicture: {fileID: 21300000, guid: ce3e2cece8a1e41fcb1930caa2135976, type: 3}
-  name: Rob Boss
-  age: 25
-  occupation: Developer
-  likes: developing
-  dislikes: murdering
-  bio: hello im Rob Boss the famous developer please don't kill me
-  isImpostor: 0
+  profilePicture: {fileID: 21300000, guid: 433af2c6037f74cab87f8aa4b84af97c, type: 3}
+  name: Gaster
+  age: 31
+  occupation: Alpine guide
+  likes: Rock climbing
+  dislikes: Peanuts
+  bio: Send me a message if you want to hang out together!
+  isImpostor: 1
   difficulty: 1

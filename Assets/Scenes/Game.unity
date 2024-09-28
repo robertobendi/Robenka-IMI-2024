@@ -1020,13 +1020,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   days:
   - dayNumber: 1
-    lengthInSeconds: 10
+    lengthInSeconds: 26
     requiredPeople: 2
     minDifficulty: 0
     maxDifficulty: 1
   - dayNumber: 2
-    lengthInSeconds: 10
-    requiredPeople: 2
+    lengthInSeconds: 40
+    requiredPeople: 3
     minDifficulty: 1
     maxDifficulty: 2
   cardsManager: {fileID: 655003818}
@@ -1642,9 +1642,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profiles:
   - {fileID: 11400000, guid: 103ab616c9c58499ea705202db45b70c, type: 2}
+  - {fileID: 11400000, guid: 7157169470a52411a879ce9e0c208549, type: 2}
   - {fileID: 11400000, guid: 96bd74a3a67054228b08e5b381883749, type: 2}
-  - {fileID: 11400000, guid: 50b99317ae0bf449490fe839397516a3, type: 2}
   - {fileID: 11400000, guid: 22e5e82f45e37436d890dadd8708ac32, type: 2}
+  - {fileID: 11400000, guid: 50b99317ae0bf449490fe839397516a3, type: 2}
+  - {fileID: 11400000, guid: a5c1f55289e104dffaf207b56831ecc5, type: 2}
+  - {fileID: 11400000, guid: 6ff5ea4ce9c26479e8d301d8cfef0f12, type: 2}
+  - {fileID: 11400000, guid: 85752c82e07d2426381111a79d003053, type: 2}
+  - {fileID: 11400000, guid: 3b9c3fdf29f5d4d7a88fe2296006196d, type: 2}
+  - {fileID: 11400000, guid: 10ce02abe56c740a992cfcc484d8688a, type: 2}
+  - {fileID: 11400000, guid: f57536e065a5e43c4aa7ea464db47a41, type: 2}
   cardPrefab: {fileID: 7176275395708251047, guid: cca4ba72ac5064504a34fd2cf540c769, type: 3}
   cardSpawnPoint: {fileID: 211041792628339171}
   cardSpawnDelay: 0.1
@@ -2139,7 +2146,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 423212437}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3851,7 +3858,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 201, y: -441.8}
+  m_AnchoredPosition: {x: 221, y: -441.8}
   m_SizeDelta: {x: 229.907, y: 219.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297022037
@@ -4546,7 +4553,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 423212437}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4950,7 +4957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30.38, y: -216.43}
+  m_AnchoredPosition: {x: -51.5, y: -216.43}
   m_SizeDelta: {x: 133.165, y: 95.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982240090

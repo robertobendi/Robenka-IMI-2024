@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7481d902f2afb489cada9023268fd465, type: 3}
-  m_Name: Impostor
+  m_Name: Lizzie
   m_EditorClassIdentifier: 
-  profilePicture: {fileID: 21300000, guid: e5182627141014ad5aed965d06015663, type: 3}
-  name: John Doe
-  age: 254
-  occupation: Human :)
-  likes: being normal
-  dislikes: nothin
-  bio: Hey I'm John im sure you remember me im just a guy
-  isImpostor: 1
+  profilePicture: {fileID: 21300000, guid: a931e21fe15e9469c9b8aa7d44a0d254, type: 3}
+  name: Lizzie
+  age: 24
+  occupation: Office worker
+  likes: Reading
+  dislikes: Loud music
+  bio: Hi I'm lizzie! tell me about your favorite book!
+  isImpostor: 0
   difficulty: 1

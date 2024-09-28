@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour
     private int currentDayIndex = 0;
     private float currentDayTimer;
     private int acceptedValidPeople = 0;
+    private int totalAcceptedPeople = 0;
     private bool isDayInProgress = false;
+    private bool hasAcceptedImpostor = false;
 
     public event System.Action<int> OnDayStart;
     public event System.Action<int> OnDayEnd;
@@ -66,7 +68,9 @@ public class GameManager : MonoBehaviour
     {
         currentDayTimer = currentDay.lengthInSeconds;
         acceptedValidPeople = 0;
+        totalAcceptedPeople = 0;
         isDayInProgress = true;
+        hasAcceptedImpostor = false;
 
         cardsManager.SetDifficultyRange(currentDay.minDifficulty, currentDay.maxDifficulty);
         cardsManager.ResetForNewDay();
@@ -81,7 +85,11 @@ public class GameManager : MonoBehaviour
         DayData currentDay = days[currentDayIndex];
         OnDayEnd?.Invoke(currentDayIndex);
 
-        if (acceptedValidPeople >= currentDay.requiredPeople && cardsManager.GetAcceptedImpostorCount() == 0)
+        if (hasAcceptedImpostor)
+        {
+            panelManager.ShowDayFailedSpyPanel();
+        }
+        else if (acceptedValidPeople >= currentDay.requiredPeople)
         {
             if (currentDayIndex + 1 < days.Count)
             {
@@ -92,19 +100,23 @@ public class GameManager : MonoBehaviour
                 panelManager.ShowGameWonPanel();
             }
         }
-        else if (cardsManager.GetAcceptedImpostorCount() > 0)
-        {
-            panelManager.ShowDayFailedSpyPanel();
-        }
         else
         {
             panelManager.ShowDayFailedNotEnoughPeoplePanel();
         }
     }
 
-    public void AcceptValidPerson()
+    public void AcceptPerson(bool isValid)
     {
-        acceptedValidPeople++;
+        if (isValid)
+        {
+            acceptedValidPeople++;
+        }
+        else
+        {
+            hasAcceptedImpostor = true;
+        }
+        totalAcceptedPeople++;
         UpdateAcceptedPeopleDisplay();
     }
 
@@ -112,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         if (acceptedPeopleText != null)
         {
-            acceptedPeopleText.text = acceptedValidPeople.ToString();
+            acceptedPeopleText.text = totalAcceptedPeople.ToString();
         }
     }
 
