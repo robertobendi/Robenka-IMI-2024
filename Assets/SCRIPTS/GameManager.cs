@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TimerUI timerUI;
     [SerializeField] private float dayIntroDisplayTime = 3f;
     [SerializeField] private string menuSceneName = "Menu";
+    [SerializeField] private TextMeshProUGUI acceptedPeopleText;
 
     private int currentDayIndex = 0;
     private float currentDayTimer;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartDay(0);
+        UpdateAcceptedPeopleDisplay();
     }
 
     private void Update()
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
         cardsManager.SetDifficultyRange(currentDay.minDifficulty, currentDay.maxDifficulty);
         cardsManager.ResetForNewDay();
         timerUI.SetupTimer(currentDay.lengthInSeconds);
+        UpdateAcceptedPeopleDisplay();
         OnDayStart?.Invoke(currentDayIndex);
     }
 
@@ -101,6 +105,15 @@ public class GameManager : MonoBehaviour
     public void AcceptValidPerson()
     {
         acceptedValidPeople++;
+        UpdateAcceptedPeopleDisplay();
+    }
+
+    private void UpdateAcceptedPeopleDisplay()
+    {
+        if (acceptedPeopleText != null)
+        {
+            acceptedPeopleText.text = acceptedValidPeople.ToString();
+        }
     }
 
     public float GetRemainingDayTime()
