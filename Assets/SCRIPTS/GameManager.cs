@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PanelManager panelManager;
     [SerializeField] private TimerUI timerUI;
     [SerializeField] private float dayIntroDisplayTime = 3f;
+    [SerializeField] private string menuSceneName = "Menu";
 
     private int currentDayIndex = 0;
     private float currentDayTimer;
@@ -122,15 +123,15 @@ public class GameManager : MonoBehaviour
         return isDayInProgress;
     }
 
-    public void RestartGame()
+    public void ReturnToMenu()
     {
-        StartCoroutine(RestartGameCoroutine());
+        StartCoroutine(ReturnToMenuCoroutine());
     }
 
-    private IEnumerator RestartGameCoroutine()
+    private IEnumerator ReturnToMenuCoroutine()
     {
         yield return StartCoroutine(panelManager.FadeOutAllPanels());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(menuSceneName);
     }
 
     public void ContinueToNextDay()

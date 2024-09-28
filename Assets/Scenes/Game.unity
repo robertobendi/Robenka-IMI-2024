@@ -699,7 +699,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'The resistance is weak.
 
-    you fall under DECEIT (corp)'
+    you fall under the regime'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77c54cffecb8342018874352227919cc, type: 2}
   m_sharedMaterial: {fileID: -8014800679995418118, guid: 77c54cffecb8342018874352227919cc, type: 2}
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   panelManager: {fileID: 637621514}
   timerUI: {fileID: 692020492}
   dayIntroDisplayTime: 3
-  dayIntroFadeDuration: 0.5
+  menuSceneName: Menu
 --- !u!1 &450696816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The resistance is strong. it's the beginning of a new republic.
+  m_text: The resistance is strong. it's the beginning of a new republic. We won.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77c54cffecb8342018874352227919cc, type: 2}
   m_sharedMaterial: {fileID: -8014800679995418118, guid: 77c54cffecb8342018874352227919cc, type: 2}
