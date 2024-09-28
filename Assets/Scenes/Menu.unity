@@ -1651,8 +1651,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmTracks:
-  - name: 
-    clip: {fileID: 0}
+  - name: game
+    clip: {fileID: 8300000, guid: 5fee2c263c2574e5dbcd78f2bdab1957, type: 3}
   fadeTime: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

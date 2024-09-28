@@ -896,8 +896,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmTracks:
-  - name: 
-    clip: {fileID: 0}
+  - name: swipe
+    clip: {fileID: 8300000, guid: a267a16c7f67a48f89ab6d16ddb4462e, type: 3}
+  - name: game
+    clip: {fileID: 8300000, guid: a267a16c7f67a48f89ab6d16ddb4462e, type: 3}
   fadeTime: 1
 --- !u!1 &379565192
 GameObject:
