@@ -40,8 +40,8 @@ public class Card : MonoBehaviour
         ageText.text = data.age.ToString();
         occupationText.text = data.occupation;
         bioText.text = data.bio;
-        likesText.text = data.likes;
-        dislikesText.text = data.dislikes;
+        likesText.text = $"Likes: {data.likes}";
+        dislikesText.text = $"Dislikes: {data.dislikes}";
     }
 
     public bool IsImpostor => profileData.isImpostor;
@@ -52,11 +52,9 @@ public class Card : MonoBehaviour
         canvasGroup.blocksRaycasts = visible;
     }
 
-    public void AnimateIn()
+    public void SetPosition(Vector3 position)
     {
-        SetVisible(true);
-        rectTransform.localScale = Vector3.zero;
-        rectTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+        rectTransform.anchoredPosition = position;
     }
 
     public void SwipeRight(Action onComplete)

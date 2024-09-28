@@ -8,7 +8,7 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private RectTransform cardSpawnPoint;
     [SerializeField] private float cardSpawnDelay = 0.5f;
-    [SerializeField] private int preloadCardCount = 2;
+    [SerializeField] private int maxVisibleCards = 2;
 
     [SerializeField] private GameManager gameManager;
 
@@ -23,17 +23,14 @@ public class CardsManager : MonoBehaviour
     private void Start()
     {
         availableProfiles = new List<ProfileData>(profiles);
-        InitializeCardStack();
+        SpawnInitialCards();
     }
 
-    private void InitializeCardStack()
+    private void SpawnInitialCards()
     {
-        for (int i = 0; i < preloadCardCount; i++)
+        for (int i = 0; i < maxVisibleCards; i++)
         {
-            if (availableProfiles.Count > 0)
-            {
-                SpawnNewCard();
-            }
+            SpawnNewCard();
         }
         if (cardStack.Count > 0)
         {
@@ -43,9 +40,8 @@ public class CardsManager : MonoBehaviour
 
     private void SpawnNewCard()
     {
-        if (availableProfiles.Count == 0)
+        if (availableProfiles.Count == 0 || !gameManager.IsDayInProgress())
         {
-            Debug.Log("No more profiles available!");
             return;
         }
 
@@ -65,11 +61,22 @@ public class CardsManager : MonoBehaviour
         newCard.Initialize(randomProfile);
         newCard.SetVisible(false);
         cardStack.Insert(0, newCard);
+
+        PositionCards();
+    }
+
+    private void PositionCards()
+    {
+        for (int i = 0; i < cardStack.Count; i++)
+        {
+            float yOffset = i * 10f; // Adjust this value to change the stacking effect
+            cardStack[i].SetPosition(new Vector3(0, -yOffset, 0));
+        }
     }
 
     public void AcceptCard()
     {
-        if (cardStack.Count > 0)
+        if (cardStack.Count > 0 && gameManager.IsDayInProgress())
         {
             Card currentCard = cardStack[cardStack.Count - 1];
             if (currentCard.IsImpostor)
@@ -83,7 +90,7 @@ public class CardsManager : MonoBehaviour
 
     public void DiscardCard()
     {
-        if (cardStack.Count > 0)
+        if (cardStack.Count > 0 && gameManager.IsDayInProgress())
         {
             Card currentCard = cardStack[cardStack.Count - 1];
             currentCard.SwipeLeft(() => RemoveTopCard());
@@ -97,9 +104,10 @@ public class CardsManager : MonoBehaviour
             cardStack.RemoveAt(cardStack.Count - 1);
             if (cardStack.Count > 0)
             {
-                cardStack[cardStack.Count - 1].AnimateIn();
+                cardStack[cardStack.Count - 1].SetVisible(true);
             }
             SpawnNewCard();
+            PositionCards();
         }
     }
 
@@ -112,5 +120,15 @@ public class CardsManager : MonoBehaviour
     public int GetAcceptedImpostorCount()
     {
         return acceptedImpostors;
+    }
+
+    public void ResetForNewDay()
+    {
+        foreach (Card card in cardStack)
+        {
+            Destroy(card.gameObject);
+        }
+        cardStack.Clear();
+        SpawnInitialCards();
     }
 }
