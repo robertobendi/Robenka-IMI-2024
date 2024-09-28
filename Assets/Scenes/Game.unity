@@ -1022,15 +1022,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   days:
   - dayNumber: 1
-    lengthInSeconds: 26
+    lengthInSeconds: 20
     requiredPeople: 2
     minDifficulty: 0
     maxDifficulty: 1
   - dayNumber: 2
-    lengthInSeconds: 40
+    lengthInSeconds: 30
     requiredPeople: 3
-    minDifficulty: 1
+    minDifficulty: 0
     maxDifficulty: 2
+  - dayNumber: 3
+    lengthInSeconds: 60
+    requiredPeople: 5
+    minDifficulty: 1
+    maxDifficulty: 3
   cardsManager: {fileID: 655003818}
   panelManager: {fileID: 637621514}
   timerUI: {fileID: 692020492}
