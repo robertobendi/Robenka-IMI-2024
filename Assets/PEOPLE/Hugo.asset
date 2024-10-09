@@ -15,7 +15,7 @@ MonoBehaviour:
   profilePicture: {fileID: 21300000, guid: 57cca7134222f4cd5902664ace8c9973, type: 3}
   name: Hugo
   age: 37
-  occupation: Bank employee
+  occupation: Bank clerk
   likes: Whiskey
   dislikes: Cats
   bio: The cigarette is just a decoration

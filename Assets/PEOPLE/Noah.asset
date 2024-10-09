@@ -15,9 +15,9 @@ MonoBehaviour:
   profilePicture: {fileID: 21300000, guid: c84488048408b4cb3b833358cf7ce687, type: 3}
   name: Noah
   age: 22
-  occupation: Professional Surfer
+  occupation: Surfer
   likes: Animals
   dislikes: Broccoli
-  bio: Here for the man of my dreams
+  bio: Come join me between the waves!
   isImpostor: 0
   difficulty: 1

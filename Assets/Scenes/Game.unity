@@ -1027,12 +1027,12 @@ MonoBehaviour:
     minDifficulty: 0
     maxDifficulty: 1
   - dayNumber: 2
-    lengthInSeconds: 30
+    lengthInSeconds: 20
     requiredPeople: 3
     minDifficulty: 0
     maxDifficulty: 2
   - dayNumber: 3
-    lengthInSeconds: 60
+    lengthInSeconds: 40
     requiredPeople: 5
     minDifficulty: 1
     maxDifficulty: 3
